@@ -1,0 +1,32 @@
+https://mars.deloitte.com.cn/mars-dts/index.do?locale=zh_CN 工作台
+
+http://eroom.deloitte.com.cn/sites/hr/intern/SitePages/%E6%96%B0%E5%88%B0%E5%BE%B7%E5%8B%A4.aspx 德勤实习生事务中心
+
+实习生-出勤code	        HC-AT-90001  DHR FY21
+实习生-未出勤code	HC-LV-90001
+
+
+
+禅道URL： https://pscdev.deloitte.com.cn/zentao/my/
+用户名：tnie
+密码：tnie123456
+
+SVN URL: https://172.16.4.8/svn/PSC_DHR/( SVN需要连Tech2的网络登陆)
+用户名：tnie
+密码：tnie123456
+
+
+Git账号：tnie
+         nie123456
+
+
+https://pscdev.deloitte.com.cn/dhr/dev/pages/ 
+https://pscdev.deloitte.com.cn/zentao/user-login-L3plbnRhby9teS5odG1s.html  禅道
+13322222222（1569591873308）  测评系统账号
+
+
+波哥：qin kimber bo
+
+
+
+dhr: hr发起入职，填写邮件等基本信息。

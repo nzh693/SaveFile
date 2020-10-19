@@ -1,0 +1,43 @@
+select * from POSITION 
+select * from employee
+select * from successor_employee 
+ 
+select p.parent_position_code from position p where p.code =10040
+select e.position_code from successor_employee e where e.position_code =
+(select p.parent_position_code from position p where p.code=10040)
+
+/*查询职位父节点 在任者*/
+select e.fullname as fullName ,e.emp_code as empCode from employee e where e.position_code=
+(select p.parent_position_code from position p where p.code=10040)
+
+
+/*查询职位父节点 继任者*/
+select e.fullname as fullName ,e.emp_code as empCode from employee e where e.position_code=
+(select e.position_code from successor_employee e where e.position_code =
+(select p.parent_position_code from position p where p.code=10040))
+
+
+
+/*查询职位当前节点 继任者*/
+(select p.code from position p where p.id=1)
+
+/*查询职位父职位*/
+select * from position p where p.id=1 
+
+select po.code from position po 
+            where po.parent_position_code in
+            (select p.parent_position_code from position p where p.code=10040)
+
+
+
+/*查询职位子节点 继任者*/
+
+select e.fullname,e.emp_code from employee e where e.position_code= 
+(select s.emp_code as em_code from successor_employee s where s.position_code =
+(select po.code from position po where po.code =(select p.parent_position_code from position p where p.code=10040)))
+
+/*查询职位子节点 在任者*/
+select e.fullname,e.emp_code from employee e where e.position_code= 
+(select po.code from position po 
+where po.parent_position_code in
+(select p.parent_position_code from position p where p.code=10040))
