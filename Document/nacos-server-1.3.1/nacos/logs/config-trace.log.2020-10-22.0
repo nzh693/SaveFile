@@ -1,0 +1,14 @@
+2020-10-22 11:38:31,428|172.16.1.127|bootstrapProperties-hr_recruit|DEFAULT_GROUP|95303e2d-3b80-4f5e-b545-0451585c4313|null|1603337911339|172.16.1.127|persist|pub|-1|677027f4e032afc50aea58d802119150
+2020-10-22 11:38:31,706|172.16.1.127|bootstrapProperties-hr_recruit|DEFAULT_GROUP|95303e2d-3b80-4f5e-b545-0451585c4313|null|1603337911339|172.16.1.127|notify|ok|355|172.16.1.127:8848
+2020-10-22 11:38:31,714|172.16.1.127|bootstrapProperties-hr_recruit|DEFAULT_GROUP|95303e2d-3b80-4f5e-b545-0451585c4313|null|1603337911339|172.16.1.127|dump|ok|375|19
+2020-10-22 11:42:52,108|172.16.1.127|hrrecruit|DEFAULT_GROUP|null|unknown|-1|pull|not-found|-1|127.0.0.1
+2020-10-22 11:42:52,198|172.16.1.127|hrrecruit.properties|DEFAULT_GROUP|null|unknown|1603272352216|pull|ok|65819982|127.0.0.1
+2020-10-22 13:57:29,778|172.16.1.127|hrrecruit|DEFAULT_GROUP|null|unknown|-1|pull|not-found|-1|127.0.0.1
+2020-10-22 13:57:29,816|172.16.1.127|hrrecruit.properties|DEFAULT_GROUP|null|unknown|1603272352216|pull|ok|73897600|127.0.0.1
+2020-10-22 14:04:18,921|172.16.1.127|null.properties|DEFAULT_GROUP|null|unknown|-1|pull|not-found|-1|127.0.0.1
+2020-10-22 14:05:25,620|172.16.1.127|hrrecruit|DEFAULT_GROUP|null|unknown|-1|pull|not-found|-1|127.0.0.1
+2020-10-22 14:05:25,642|172.16.1.127|hrrecruit.properties|DEFAULT_GROUP|null|unknown|1603272352216|pull|ok|74373426|127.0.0.1
+2020-10-22 14:06:22,717|172.16.1.127|hrrecruit|DEFAULT_GROUP|null|unknown|-1|pull|not-found|-1|127.0.0.1
+2020-10-22 14:06:22,738|172.16.1.127|hrrecruit.properties|DEFAULT_GROUP|null|unknown|1603272352216|pull|ok|74430522|127.0.0.1
+2020-10-22 14:07:01,657|172.16.1.127|hrsalary|DEFAULT_GROUP|null|unknown|-1|pull|not-found|-1|127.0.0.1
+2020-10-22 14:07:01,670|172.16.1.127|hrsalary.properties|DEFAULT_GROUP|null|unknown|-1|pull|not-found|-1|127.0.0.1

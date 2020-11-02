@@ -1,0 +1,28 @@
+2020-10-22 14:05:36,676 INFO DEFAULT_GROUP@@hrrecruit {SYNC} {IP-NEW} cluster: DEFAULT, new ips size: 1, content: [172.16.1.127:8091:unknown:DEFAULT_1.0_true_false_DEFAULT]
+
+2020-10-22 14:05:36,691 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@hrrecruit, ips: 172.16.1.127:8091_true,
+
+2020-10-22 14:06:08,417 INFO DEFAULT_GROUP@@hrrecruit {SYNC} {IP-DEAD} cluster: DEFAULT, dead ips size: 1, content: [172.16.1.127:8091:unknown:DEFAULT_1.0_true_false_DEFAULT]
+
+2020-10-22 14:06:08,418 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@hrrecruit, ips: 
+
+2020-10-22 14:07:30,743 INFO DEFAULT_GROUP@@hrrecruit {SYNC} {IP-NEW} cluster: DEFAULT, new ips size: 1, content: [172.16.1.127:8091:unknown:DEFAULT_1.0_true_false_DEFAULT]
+
+2020-10-22 14:07:30,743 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@hrrecruit, ips: 172.16.1.127:8091_true,
+
+2020-10-22 14:07:39,093 INFO DEFAULT_GROUP@@hrsalary {SYNC} {IP-NEW} cluster: DEFAULT, new ips size: 1, content: [172.16.1.127:8092:unknown:DEFAULT_1.0_true_false_DEFAULT]
+
+2020-10-22 14:07:39,093 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@hrsalary, ips: 172.16.1.127:8092_true,
+
+2020-10-22 14:59:12,129 INFO {POS} {IP-DISABLED} valid: 172.16.1.127:8091@DEFAULT@DEFAULT_GROUP@@hrrecruit, region: unknown, msg: client timeout after 15000, last beat: 1603349934765
+
+2020-10-22 14:59:14,656 INFO {POS} {IP-DISABLED} valid: 172.16.1.127:8092@DEFAULT@DEFAULT_GROUP@@hrsalary, region: unknown, msg: client timeout after 15000, last beat: 1603349937739
+
+2020-10-22 14:59:27,486 INFO DEFAULT_GROUP@@hrrecruit {SYNC} {IP-DEAD} cluster: DEFAULT, dead ips size: 1, content: [172.16.1.127:8091:unknown:DEFAULT_1.0_false_false_DEFAULT]
+
+2020-10-22 14:59:27,486 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@hrrecruit, ips: 
+
+2020-10-22 14:59:29,676 INFO DEFAULT_GROUP@@hrsalary {SYNC} {IP-DEAD} cluster: DEFAULT, dead ips size: 1, content: [172.16.1.127:8092:unknown:DEFAULT_1.0_false_false_DEFAULT]
+
+2020-10-22 14:59:29,676 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@hrsalary, ips: 
+

@@ -1,0 +1,12 @@
+2020-11-02 14:57:01,543 INFO [dump-all-ok] bootstrapProperties-hr_recruit+DEFAULT_GROUP, 1603271496994, length=17, md5=dc3cf71982b4bb4ff99bfcaf169db872
+
+2020-11-02 14:57:01,548 INFO [dump-all-ok] hrrecruit.properties+DEFAULT_GROUP, 1603272352216, length=16, md5=5aebf303840bab20dc8fe7d1009683d1
+
+2020-11-02 14:57:01,549 INFO [dump-all-ok] bootstrapProperties-hr_recruit+DEFAULT_GROUP, 1603337911339, length=19, md5=677027f4e032afc50aea58d802119150
+
+2020-11-02 14:59:35,414 WARN [dump-ignore] ignore to save cache file. groupKey=bootstrapProperties-hr_recruit+DEFAULT_GROUP+95303e2d-3b80-4f5e-b545-0451585c4313, md5=866d25bbf8af750e2035004fdd88c82f, lastModifiedOld=1604300360788, lastModifiedNew=1604300375385
+
+2020-11-02 15:16:47,606 WARN [dump-ignore] ignore to save cache file. groupKey=hrrecruit.properties+DEFAULT_GROUP+4a41682d-6ec6-4f42-aaf8-b4d6e7247f4d, md5=677027f4e032afc50aea58d802119150, lastModifiedOld=1604300510689, lastModifiedNew=1604301407536
+
+2020-11-02 15:17:05,003 WARN [dump-ignore] ignore to save cache file. groupKey=hrrecruit.properties+DEFAULT_GROUP+95303e2d-3b80-4f5e-b545-0451585c4313, md5=866d25bbf8af750e2035004fdd88c82f, lastModifiedOld=1604300546868, lastModifiedNew=1604301424964
+

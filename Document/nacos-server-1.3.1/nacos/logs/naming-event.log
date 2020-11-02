@@ -1,0 +1,72 @@
+2020-11-02 15:03:46,893 INFO DEFAULT_GROUP@@hrrecruit {SYNC} {IP-NEW} cluster: DEFAULT, new ips size: 1, content: [172.16.1.127:8091:unknown:DEFAULT_1.0_true_false_DEFAULT]
+
+2020-11-02 15:03:46,900 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@hrrecruit, ips: 172.16.1.127:8091_true,
+
+2020-11-02 15:07:51,840 INFO {POS} {IP-DISABLED} valid: 172.16.1.127:8091@DEFAULT@DEFAULT_GROUP@@hrrecruit, region: unknown, msg: client timeout after 15000, last beat: 1604300852088
+
+2020-11-02 15:07:53,587 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@hrrecruit, ips: 172.16.1.127:8091_false,
+
+2020-11-02 15:07:58,581 INFO service: DEFAULT_GROUP@@hrrecruit {POS} {IP-ENABLED} valid: 172.16.1.127:8091@DEFAULT, region: unknown, msg: client beat ok
+
+2020-11-02 15:16:31,946 INFO {POS} {IP-DISABLED} valid: 172.16.1.127:8091@DEFAULT@DEFAULT_GROUP@@hrrecruit, region: unknown, msg: client timeout after 15000, last beat: 1604301374214
+
+2020-11-02 15:16:47,156 INFO DEFAULT_GROUP@@hrrecruit {SYNC} {IP-DEAD} cluster: DEFAULT, dead ips size: 1, content: [172.16.1.127:8091:unknown:DEFAULT_1.0_false_false_DEFAULT]
+
+2020-11-02 15:16:47,156 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@hrrecruit, ips: 
+
+2020-11-02 15:17:24,580 INFO DEFAULT_GROUP@@hrrecruit {SYNC} {IP-NEW} cluster: DEFAULT, new ips size: 1, content: [172.16.1.127:8091:unknown:DEFAULT_1.0_true_false_DEFAULT]
+
+2020-11-02 15:17:24,580 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@hrrecruit, ips: 172.16.1.127:8091_true,
+
+2020-11-02 15:18:42,169 INFO {POS} {IP-DISABLED} valid: 172.16.1.127:8091@DEFAULT@DEFAULT_GROUP@@hrrecruit, region: unknown, msg: client timeout after 15000, last beat: 1604301504632
+
+2020-11-02 15:18:57,176 INFO DEFAULT_GROUP@@hrrecruit {SYNC} {IP-DEAD} cluster: DEFAULT, dead ips size: 1, content: [172.16.1.127:8091:unknown:DEFAULT_1.0_false_false_DEFAULT]
+
+2020-11-02 15:18:57,176 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@hrrecruit, ips: 
+
+2020-11-02 15:19:34,221 INFO DEFAULT_GROUP@@hrrecruit {SYNC} {IP-NEW} cluster: DEFAULT, new ips size: 1, content: [172.16.1.127:8091:unknown:DEFAULT_1.0_true_false_DEFAULT]
+
+2020-11-02 15:19:34,221 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@hrrecruit, ips: 172.16.1.127:8091_true,
+
+2020-11-02 15:23:22,279 INFO {POS} {IP-DISABLED} valid: 172.16.1.127:8091@DEFAULT@DEFAULT_GROUP@@hrrecruit, region: unknown, msg: client timeout after 15000, last beat: 1604301784645
+
+2020-11-02 15:23:24,859 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@hrrecruit, ips: 172.16.1.127:8091_false,
+
+2020-11-02 15:23:29,853 INFO service: DEFAULT_GROUP@@hrrecruit {POS} {IP-ENABLED} valid: 172.16.1.127:8091@DEFAULT, region: unknown, msg: client beat ok
+
+2020-11-02 15:26:47,322 INFO {POS} {IP-DISABLED} valid: 172.16.1.127:8091@DEFAULT@DEFAULT_GROUP@@hrrecruit, region: unknown, msg: client timeout after 15000, last beat: 1604301990141
+
+2020-11-02 15:27:02,330 INFO DEFAULT_GROUP@@hrrecruit {SYNC} {IP-DEAD} cluster: DEFAULT, dead ips size: 1, content: [172.16.1.127:8091:unknown:DEFAULT_1.0_false_false_DEFAULT]
+
+2020-11-02 15:27:02,330 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@hrrecruit, ips: 
+
+2020-11-02 15:44:54,299 INFO DEFAULT_GROUP@@hrrecruit {SYNC} {IP-NEW} cluster: DEFAULT, new ips size: 1, content: [172.16.1.127:8091:unknown:DEFAULT_1.0_true_false_DEFAULT]
+
+2020-11-02 15:44:54,299 INFO [IP-UPDATED] namespace: 95303e2d-3b80-4f5e-b545-0451585c4313, service: DEFAULT_GROUP@@hrrecruit, ips: 172.16.1.127:8091_true,
+
+2020-11-02 15:45:44,373 INFO {POS} {IP-DISABLED} valid: 172.16.1.127:8091@DEFAULT@DEFAULT_GROUP@@hrrecruit, region: unknown, msg: client timeout after 15000, last beat: 1604303129326
+
+2020-11-02 15:45:59,394 INFO DEFAULT_GROUP@@hrrecruit {SYNC} {IP-DEAD} cluster: DEFAULT, dead ips size: 1, content: [172.16.1.127:8091:unknown:DEFAULT_1.0_false_false_DEFAULT]
+
+2020-11-02 15:45:59,394 INFO [IP-UPDATED] namespace: 95303e2d-3b80-4f5e-b545-0451585c4313, service: DEFAULT_GROUP@@hrrecruit, ips: 
+
+2020-11-02 15:46:26,425 INFO DEFAULT_GROUP@@hrrecruit {SYNC} {IP-NEW} cluster: DEFAULT, new ips size: 1, content: [172.16.1.127:8091:unknown:DEFAULT_1.0_true_false_DEFAULT]
+
+2020-11-02 15:46:26,425 INFO [IP-UPDATED] namespace: 95303e2d-3b80-4f5e-b545-0451585c4313, service: DEFAULT_GROUP@@hrrecruit, ips: 172.16.1.127:8091_true,
+
+2020-11-02 15:53:09,465 INFO {POS} {IP-DISABLED} valid: 172.16.1.127:8091@DEFAULT@DEFAULT_GROUP@@hrrecruit, region: unknown, msg: client timeout after 15000, last beat: 1604303571956
+
+2020-11-02 15:53:24,474 INFO DEFAULT_GROUP@@hrrecruit {SYNC} {IP-DEAD} cluster: DEFAULT, dead ips size: 1, content: [172.16.1.127:8091:unknown:DEFAULT_1.0_false_false_DEFAULT]
+
+2020-11-02 15:53:24,474 INFO [IP-UPDATED] namespace: 95303e2d-3b80-4f5e-b545-0451585c4313, service: DEFAULT_GROUP@@hrrecruit, ips: 
+
+2020-11-02 15:54:20,188 INFO DEFAULT_GROUP@@hrrecruit {SYNC} {IP-NEW} cluster: DEFAULT, new ips size: 1, content: [172.16.1.127:8091:unknown:DEFAULT_1.0_true_false_DEFAULT]
+
+2020-11-02 15:54:20,188 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@hrrecruit, ips: 172.16.1.127:8091_true,
+
+2020-11-02 16:18:55,428 INFO {POS} {IP-DISABLED} valid: 172.16.1.127:8091@DEFAULT@DEFAULT_GROUP@@hrrecruit, region: unknown, msg: client timeout after 15000, last beat: 1604305117214
+
+2020-11-02 16:19:10,439 INFO DEFAULT_GROUP@@hrrecruit {SYNC} {IP-DEAD} cluster: DEFAULT, dead ips size: 1, content: [172.16.1.127:8091:unknown:DEFAULT_1.0_false_false_DEFAULT]
+
+2020-11-02 16:19:10,439 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@hrrecruit, ips: 
+
