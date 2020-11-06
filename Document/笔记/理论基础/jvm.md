@@ -1387,11 +1387,15 @@ public static void testStringTableAdjust(){
 
 ######                        a、运行时数据区【Mark Word】
 
+对象的所处的状态，决定了markword存储的内容，如下表所示:
+
+![](image/Snipaste_2020-11-05_14-23-36.png)
+
 ​                            	**哈希码**、 **GC分代年龄**、**锁状态标志**、**线程持有的锁**、 **偏向线程的ID**、**偏向时间戳**
 
 ​                 <img src="image/20200525093617.png" style="zoom:67%;" />
 
-######                        b、类型指针【Klass Word】
+######                        b、类型指针【klass Word】
 
 ​                             对象指向自身的类型元数据的指针，类员信息存储在方法区。通过这个指针来确定对象是方法区哪个类的实例【Object.getClass()】
 
