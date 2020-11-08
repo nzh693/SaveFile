@@ -165,6 +165,12 @@ CAS: compare  and swap，比较和交换，CAS有3个操作数，内存值V，�
 
 该算法存在的问题：ABA问题（版本控制） 循环开销大（） 只能保证一个共享变量的原子操作。
 
+1. ABA问题
+    因为CAS会检查旧值有没有变化，这里存在这样一个有意思的问题。比如一个旧值A变为了成B，然后再变成A，刚好在做CAS时检查发现旧值并没有变化依然为A，但是实际上的确发生了变化。解决方案可以沿袭数据库中常用的乐观锁方式，添加一个版本号可以解决。原来的变化路径A->B->A就变成了1A->2B->3C。
+2. 自旋时间过长
+
+使用CAS时非阻塞同步，也就是说不会将线程挂起，会自旋（无非就是一个死循环）进行下一次尝试，如果这里自旋时间过长对性能是很大的消耗。如果JVM能支持处理器提供的pause指令，那么在效率上会有一定的提升。
+
 
 
 ##### **7、Monitor**
@@ -340,7 +346,7 @@ StringBuffer 和 StringBuilder 类的对象能够被多次的修改，并且**�
 #####   1. hashMap
 
 - 底层数组+链表实现，可**以存储null键和null值**，线程**不安全**
-- 初始size为**16**，扩容：newsize = oldsize*2，size一定为2的n次幂
+- 初始size为**16**，扩容：newsize = oldsize*2，size一定为2的n 次幂
 - 扩容针对整个Map，每次扩容时，原来数组中的元素依次重新计算存放位置，并重新插入
 - 插入元素后才判断该不该扩容，有可能无效扩容（插入后如果扩容，如果没有再次插入，就会产生无效扩容）
 - 当Map中元素总数超过Entry数组的75%，触发扩容操作，为了减少链表长度，元素分配更均匀
@@ -400,7 +406,135 @@ StringBuffer 和 StringBuilder 类的对象能够被多次的修改，并且**�
 
 <img src="image/20200716150229.png" style="zoom:50%;" />
 
-##### 2.ConcurrentHashMap
+**`haspMap` 插入流程**
+
+​                           <img src="image/Snipaste_2020-11-07_17-28-57.png" style="zoom:75%;" />
+
+1. 判断数组是否为空，为空进行初始化;
+
+2. 不为空，计算 k 的 hash 值，通过`(n - 1) & hash`计算应当存放在数组中的下标 index;
+
+3. 查看 table[index] 是否存在数据，没有数据就构造一个Node节点存放在 table[index] 中；
+
+4. 存在数据，说明发生了hash冲突(存在二个节点key的hash值一样), 继续判断key是否相等，相等，用新的value替换原数据(onlyIfAbsent为false)；
+
+5. 如果不相等，判断当前节点类型是不是树型节点，如果是树型节点，创造树型节点插入红黑树中；(如果当前节点是树型节点证明当前已经是红黑树了)
+
+6. 如果不是树型节点，创建普通Node加入链表中；判断链表长度是否大于 8并且数组长度大于64， 大于的话链表转换为红黑树；
+
+7. 插入完成之后判断当前节点数是否大于阈值，如果大于开始扩容为原数组的二倍。
+
+   
+
+8. ```java
+   final V putVal(int hash, K key, V value, boolean onlyIfAbsent,//插入源码
+                  boolean evict) {
+       Node<K,V>[] tab; Node<K,V> p; int n, i;
+       if ((tab = table) == null || (n = tab.length) == 0)
+           n = (tab = resize()).length;
+       if ((p = tab[i = (n - 1) & hash]) == null)
+           tab[i] = newNode(hash, key, value, null);
+       else {
+           Node<K,V> e; K k;
+           if (p.hash == hash &&
+               ((k = p.key) == key || (key != null && key.equals(k))))
+               e = p;
+           else if (p instanceof TreeNode)
+               e = ((TreeNode<K,V>)p).putTreeVal(this, tab, hash, key, value);
+           else {
+               for (int binCount = 0; ; ++binCount) {
+                   if ((e = p.next) == null) {
+                       p.next = newNode(hash, key, value, null);
+                       if (binCount >= TREEIFY_THRESHOLD - 1) // -1 for 1st
+                           treeifyBin(tab, hash);
+                       break;
+                   }
+                   if (e.hash == hash &&
+                       ((k = e.key) == key || (key != null && key.equals(k))))
+                       break;
+                   p = e;
+               }
+           }
+           if (e != null) { // existing mapping for key
+               V oldValue = e.value;
+               if (!onlyIfAbsent || oldValue == null)
+                   e.value = value;
+               afterNodeAccess(e);
+               return oldValue;
+           }
+       }
+       ++modCount;
+       if (++size > threshold)
+           resize();
+       afterNodeInsertion(evict);
+       return null;
+   }
+   ```
+
+****
+
+**`HashMap`设定初始容量大小**
+
+​           在new一个hashMap的时候可以传一个容量参数或负载因子【容量默认是16，负载因子默认是0.75】。传入的参数需要经过`tableSizeFor()`进行处理【为了容量一定是2的整数幂次方】。处理结果为得到一个大于且最接近容量参数的2的整幂次数。
+
+```java
+static final int tableSizeFor(int cap) {//50 经过处理得到 64  
+    int n = cap - 1;
+    n |= n >>> 1;
+    n |= n >>> 2;
+    n |= n >>> 4;
+    n |= n >>> 8;
+    n |= n >>> 16;
+    return (n < 0) ? 1 : (n >= MAXIMUM_CAPACITY) ? MAXIMUM_CAPACITY : n + 1;
+}
+```
+
+进行位运算，设计的非常巧妙。
+
+<img src="image/Snipaste_2020-11-07_17-37-29.png" style="zoom: 50%;" />
+
+**`HashMap`哈希函数的设计**【扰动函数】
+
+​         hash函数是先拿到 key 的hashcode，是一个32位的int值，然后让hashcode的高16位和低16位进行异或操作。得出的hash值再进行处理【hash & (n-1)】n为容量；最后得到值为桶的下标值。
+
+好处：
+
+​          1. 尽可能降低hash碰撞，越分散越好；
+
+​          2. 算法一定要尽可能高效，因为这是高频操作, 因此采用位运算
+
+```java
+static final int hash(Object key) {
+    int h;
+    return (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16);
+}
+//注释翻译
+计算key.hashCode()并扩展(XORs)更高的哈希位降低。由于表使用幂- 2屏蔽，因此设置为仅在当前掩码上方变化位的哈希值将会改变总是发生碰撞。(在已知的例子中有一组浮点键在小表中保存连续的整数。)所以我们应用一种变换来扩展更高位的影响向下。在速度、效用和bit-spreading质量。因为有很多常见的散列已经合理地分配了(所以不能从因为我们用树木来处理大量的箱子里的碰撞，我们只是XOR的一些移位减少系统损失的最便宜的可能的方法，以及合并最高位的影响，否则由于表的边界，永远不要在索引计算中使用
+```
+
+**`JDK1.8`三点主要的优化**
+
+1. 数组+链表改成了数组+链表或红黑树；【防止发生hash冲突，链表长度过长，将时间复杂度由`O(n)`降为`O(logn)`;】
+
+2. 链表的插入方式从头插法改成了尾插法，简单说就是插入时，如果数组位置上已经有元素，1.7将新元素放到数组中，原始节点作为新节点的后继节点，1.8遍历链表，将元素放置到链表的最后；
+
+   
+
+3. 扩容的时候1.7需要对原数组中的元素进行重新hash定位在新数组的位置，1.8采用更简单的判断逻辑，位置不变或索引+旧容量大小；
+
+4. 在插入时，1.7先判断是否需要扩容，再插入，1.8先进行插入，插入完成再判断是否需要扩容；
+
+**有序的Map**
+
+  `LinkedHashMap` 和 `TreeMap`
+
+`LinkedHashMap` ：内部维护了一个单链表，有头尾节点，同时`LinkedHashMap`节点Entry内部除了继承`HashMap`的Node属性，还有before 和 after用于标识前置节点和后置节点。可以实现按插入的顺序或访问顺序排序。
+
+`TreeMap`：TreeMap是按照Key的自然顺序或者Comprator的顺序进行排序，内部是通过红黑树来实现。所以要么key所属的类实现Comparable接口，或者自定义一个实现了Comparator接口的比较器，传给TreeMap用于key的比较。
+
+
+
+##### 2.`ConcurrentHashMap`
 
 - 底层采用**分段**的数组+链表实现，线程**安全**
 
@@ -435,9 +569,9 @@ StringBuffer 和 StringBuilder 类的对象能够被多次的修改，并且**�
   
 ##### 4. 面试问题
 
-​    1）HaspMap扩容是怎样扩容的，为什么都是2的N次幂的大小；
+​    1）`haspMap`扩容是怎样扩容的，为什么都是2的N次幂的大小；
 
-​          在haspMap添加、扩容方法中会涉及到 **(n - 1) & hash** 的运算，，不同的hash值，和(n-1)进行位运算后，能够得出不同的值，使得添加的元素能够均匀分布在集合中不同的位置上，避免hash碰撞。
+​          在`haspMap`添加、扩容方法中会涉及到 **(n - 1) & hash** 的运算，，不同的hash值，和(n-1)进行位运算后，能够得出不同的值，使得添加的元素能够均匀分布在集合中不同的位置上，避免hash碰撞。
 
 ```java
 final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
@@ -464,7 +598,9 @@ final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
    JDK1.7 具体表现:是在当两个或多个线程同时扩容时，当一个扩容完成，而另外一个挂起，回来继续执行扩容操作时，因为使用的是头插法，会反序，在链表上就会成环。当执行查询get方法时当hash值刚好在有环形链表的桶时程序就会进入死循环
 ```
 
-  
+ 3）加载因子为什么是 0.75？
+
+​    因为如果加载因为接近于1的时候，那么浪费的空间就比较少，但是每次在添加的时候hash碰撞的几率就会很大，很影响插入的性能，而且容易导致链表/红黑树的查找时间增大。过小的话，虽然减少了hash碰撞的几率，那么就会导致频繁的扩容，扩容时一个耗时且消耗性能的操作，也会浪费空间。所有取了一个折中的因子0.75。
 
 #### 3、List
 
@@ -723,7 +859,12 @@ public void readExternal(ObjectInput in) throws IOException, ClassNotFoundExcept
 - 方法必须要被private修饰                                           ----->才能被调用
 - 第一行调用默认的defaultRead/WriteObject();        ----->隐式序列化非static和transient
 - 调用read/writeObject()将获得的值赋给相应的值    ----->显式序列化
-  
+
+
+
+##### 5、克隆
+
+
 
 ### 五、JUC
 
@@ -738,6 +879,50 @@ public void readExternal(ObjectInput in) throws IOException, ClassNotFoundExcept
 <img src="image/20200804223642.png" style="zoom:50%;" />
 
 #### 1、atomic包
+
+​        Java1.5的Atomic包名为`java.util.concurrent.atomic`。这个包提供了一系列原子类。这些类可以保证多线程环境下，当某个线程在执行atomic的方法时，不会被其他线程打断，而别的线程就像自旋锁一样，一直等到该方法执行完成，才由JVM从等待队列中选择一个线程执行。Atomic类在软件层面上是非阻塞的，它的原子性其实是在硬件层面上借助相关的指令来保证的； atomic包提高原子更新基本类型的工具类，主要有四组：
+
+#####    1.原子更新基本类型
+
+​     1. `AtomicBoolean`:  以原子更新的方式更新boolean。
+
+​     2. `AtomicInteger`:    以原子更新的方式更新int。
+
+​     3. `AtomicLong`:        以原子更新的方式更新long。
+
+#####    2.原子更新数组类型
+
+​     1.`AtomicIntegerArray`：原子更新整型数组中的元素。
+
+​     2.`AtomicLongArray`：原子更新长整型数组中的元素。
+
+​     3.`AtomicReferenceArray`：原子更新引用数组中的元素
+
+#####    3.原子更新引用属性类型
+
+     1. `AtomicReference<v>`：原子更新引用类型；
+        2. `AtomicReferenceFieldUpdater`：原子更新引用类型里的字段；
+     3. `AtomicMarkableReference`：原子更新带有标记位的引用类型；
+
+#####    4.原子更新引用类型
+
+   1. `AtomicIntegeFieldUpdater`：原子更新整型字段类；
+
+   2. `AtomicLongFieldUpdater`：原子更新长整型字段类；
+
+   3. `AtomicStampedReference`：原子更新引用类型，这种更新方式会带有版本号。而为什么在更新的时候会带有版本号，是为了解决CAS的ABA
+
+      说明：源码中实际上是调用了unsafe实例的getAndAddInt方法，unsafe实例的获取时通过UnSafe类的静态方法getUnsafe获取；核心方法是`compareAndSet()`方法;
+
+      ```java
+      private static final Unsafe unsafe = Unsafe.getUnsafe();
+      
+      public final boolean compareAndSet(V expect, V update) {
+          return unsafe.compareAndSwapObject(this, valueOffset, expect, update);//CAS操作
+      }
+      ```
+
+​         
 
 #### 2、locks包
 
