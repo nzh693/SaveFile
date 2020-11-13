@@ -133,19 +133,35 @@
 - Spring Web：提供了基本的面向Web的综合特性，例如多方文件上传；
 - Spring MVC：提供面向Web应用的Model-View-Controller实现。
 
-#### 2、bean的作用域
 
-（1）singleton：**默认，**每个容器中只有一个bean的实例，单例的模式由BeanFactory自身来维护。
 
-（2）prototype：为每一个bean请求提供一个实例。
+#### 2、bean
 
-（3）request：为每一个网络请求创建一个实例，在请求完成以后，bean会失效并被垃圾回收器回收。
+        1. **生命周期**
+           1. 实例化 Instantiation
+           2. 属性赋值 Populate
+           3. 初始化 Initialization
+           4. 销毁 Destruction
 
-（4）session：与request范围类似，确保每个session中有一个bean的实例，在session过期后，bean会随之失效。
+​      主要逻辑都在doCreate()方法中，逻辑很清晰，就是顺序调用以下三个方法，这三个方法与三个生命周期阶段一一对应。
 
-（5）global-session：全局作用域，global-session和Portlet应用相关。当你的应用部署在Portlet容器中工作时，它包含很多portlet。如果你想要声明让所有的portlet共用全局的存储变量的话，那么这全局变量需要存储在global-session中。全局作用域与Servlet中的session作用域效果相同。
+​     
 
-#### 3、容器
+        1. **作用域**
+
+​          （1）singleton：**默认，**每个容器中只有一个bean的实例，单例的模式由BeanFactory自身来维护。
+
+​		 （2）prototype：为每一个bean请求提供一个实例。
+
+​         （3）request：为每一个网络请求创建一个实例，在请求完成以后，bean会失效并被垃圾回收器回收。
+
+​         （4）session：与request范围类似，确保每个session中有一个bean的实例，在session过期后，bean会随之失效。
+
+​         （5）global-session：全局作用域，global-session和Portlet应用相关。当你的应用部署在Portlet容器中工作时，它包含很多portlet。如果你想要声明让所有的portlet共用全局的存储变量的话，那么这全局变量需要存储在global-session中。全局作用域与Servlet中的session作用域效果相同。
+
+
+
+#### 2、容器
 
 #####   0、概述
 
